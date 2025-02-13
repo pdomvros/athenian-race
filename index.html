@@ -91,8 +91,15 @@
 
     <p id="winnerMessage">ΜΠΡΑΒΟ! Η ομάδα νίκησε!</p>
 
-    <!-- Ηχος αποτυχίας -->
-    <audio id="failSound" src="fail-sound.mp3"></audio>
+    <!-- Ηχοι -->
+    <audio id="failSound">
+        <source src="fail-sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="successSound">
+        <source src="success-sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
         const questions = {
@@ -170,6 +177,8 @@
                 document.querySelectorAll(`#questions${team} div:nth-child(${index + 1}) button`).forEach(btn => btn.disabled = true);
                 if (index === 9) { 
                     document.getElementById("winnerMessage").style.display = "block";
+                    const successSound = document.getElementById("successSound");
+                    successSound.play(); // Παίζει τον ήχο επιτυχίας
                     disableAllTeams();
                 }
             } else {
