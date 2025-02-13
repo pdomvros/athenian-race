@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #f0e6d2, #d4b996), url('athens_5th_century.jpg');
+            background: linear-gradient(to bottom, #f0e6d2, #d4b996);
             background-size: cover;
             background-attachment: fixed;
             text-align: center;
@@ -138,6 +138,13 @@
             C: [true, false, true, false, true, true, false, true, false, true],
             D: [true, false, true, true, false, true, false, false, true, true]
         };
+
+        function showQuestion(team, index) {
+            const questionElement = document.getElementById(`question${team}${index}`);
+            const buttons = document.querySelectorAll(`#questions${team} div:nth-child(${index + 1}) button`);
+            questionElement.classList.remove("hidden");
+            buttons.forEach(btn => btn.classList.remove("hidden"));
+        }
 
         function checkAnswer(team, index, selectedAnswer) {
             if (correctAnswers[team][index] === selectedAnswer) {
