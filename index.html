@@ -52,6 +52,17 @@
             margin-top: 20px;
             display: none;
         }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -79,6 +90,9 @@
     </div>
 
     <p id="winnerMessage">ΜΠΡΑΒΟ! Η ομάδα νίκησε!</p>
+
+    <!-- Ηχος αποτυχίας -->
+    <audio id="failSound" src="fail-sound.mp3"></audio>
 
     <script>
         const questions = {
@@ -147,13 +161,26 @@
         }
 
         function checkAnswer(team, index, selectedAnswer) {
+            const feedbackElement = document.createElement("p");
+            feedbackElement.classList.add("feedback");
+
             if (correctAnswers[team][index] === selectedAnswer) {
+                feedbackElement.textContent = "Σωστό!";
+                feedbackElement.classList.add("correct");
                 document.querySelectorAll(`#questions${team} div:nth-child(${index + 1}) button`).forEach(btn => btn.disabled = true);
                 if (index === 9) { 
                     document.getElementById("winnerMessage").style.display = "block";
                     disableAllTeams();
                 }
+            } else {
+                feedbackElement.textContent = "Προσπάθησε ξανά!";
+                feedbackElement.classList.add("incorrect");
+                const failSound = document.getElementById("failSound");
+                failSound.play(); // Παίζει τον ήχο αποτυχίας
             }
+
+            const questionDiv = document.querySelector(`#questions${team} div:nth-child(${index + 1})`);
+            questionDiv.appendChild(feedbackElement);
         }
 
         function disableAllTeams() {
