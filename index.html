@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Το Αθηναϊκό Κράτος</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f0e6d2, #d4b996), url('athens_5th_century.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        h2 {
+            font-family: 'Comic Sans MS', cursive;
+        }
+        .instructions {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .column {
+            width: 22%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        #winnerMessage {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</h2>
+    <h1>Το Αθηναϊκό Κράτος</h1>
+    <p class="instructions">Μόλις ο/η εκπαιδευτικός σας δώσει το σύνθημα ξεκινήστε! Η ομάδα που θα απαντήσει πρώτη σωστά και τις 10 ερωτήσεις και θα φτάσει στο τέλος του πίνακα θα είναι η νικήτρια.</p>
+    
+    <div class="container">
+        <div class="column" id="teamA">
+            <h3>Ομάδα Α</h3>
+            <div id="questionsA"></div>
+        </div>
+        <div class="column" id="teamB">
+            <h3>Ομάδα Β</h3>
+            <div id="questionsB"></div>
+        </div>
+        <div class="column" id="teamC">
+            <h3>Ομάδα Γ</h3>
+            <div id="questionsC"></div>
+        </div>
+        <div class="column" id="teamD">
+            <h3>Ομάδα Δ</h3>
+            <div id="questionsD"></div>
+        </div>
+    </div>
 
+    <p id="winnerMessage">ΜΠΡΑΒΟ! Η ομάδα νίκησε!</p>
+
+    <script>
+        const questions = {
+            A: [
+                "Ο Εφιάλτης αφαίρεσε από τον Άρειο Πάγο την αποκλειστικότητα στην απονομή της δικαιοσύνης.",
+                "Η Εκκλησία του Δήμου ήταν υπεύθυνη μόνο για τη θέσπιση νόμων και δεν είχε καμία άλλη αρμοδιότητα.",
+                "Οι Εννέα Άρχοντες διατηρούσαν μεγάλη πολιτική δύναμη κατά την εποχή του Περικλή.",
+                "Οι στρατηγοί εκλέγονταν από την Εκκλησία του Δήμου και είχαν σημαντικές αρμοδιότητες.",
+                "Η Βουλή των Πεντακοσίων εκλεγόταν ισόβια και λειτουργούσε ως νομοθετικό σώμα.",
+                "Το πολίτευμα της Αθήνας έγινε πιο δημοκρατικό με τις μεταρρυθμίσεις του Εφιάλτη και του Περικλή.",
+                "Η Ηλιαία ήταν ένα μικρό δικαστήριο που αποτελούνταν από μόλις 100 δικαστές.",
+                "Όλοι οι ελεύθεροι πολίτες της Αττικής είχαν δικαίωμα συμμετοχής στην Εκκλησία του Δήμου.",
+                "Η Εκκλησία του Δήμου μπορούσε να απορρίψει ή να εγκρίνει τις αποφάσεις της Βουλής των Πεντακοσίων.",
+                "Ο Κλεισθένης ήταν υπεύθυνος για τη δημιουργία των δέκα φυλών της Αθήνας."
+            ],
+            B: [
+                "Η οικονομία της Αθήνας βασιζόταν αποκλειστικά στη γεωργία.",
+                "Ο Πειραιάς ήταν το μεγαλύτερο εμπορικό λιμάνι της Αθήνας.",
+                "Οι λειτουργίες ήταν ένας τρόπος φορολόγησης των φτωχών πολιτών.",
+                "Οι πλούσιοι Αθηναίοι που πρόσφεραν χρήματα μέσω των λειτουργιών μπορούσαν να στήσουν αναμνηστικά μνημεία.",
+                "Οι μέτοικοι πλήρωναν ειδικό φόρο που ονομαζόταν «μετοίκιο».",
+                "Οι δούλοι είχαν πολιτικά δικαιώματα στην Αθήνα.",
+                "Το κράτος εισέπραττε έσοδα από την εκμετάλλευση των μεταλλείων.",
+                "Οι δούλοι χρησιμοποιούνταν μόνο ως υπηρέτες στα σπίτια των πλουσίων.",
+                "Οι πλούσιοι Αθηναίοι ήταν υποχρεωμένοι να χρηματοδοτούν δημόσιες δραστηριότητες μέσω των λειτουργιών.",
+                "Το αθηναϊκό κράτος δεν είχε έσοδα από τους συμμάχους του."
+            ],
+            C: [
+                "Σκοπός της εκπαίδευσης στην Αθήνα ήταν η αρμονική καλλιέργεια σώματος και πνεύματος.",
+                "Η εκπαίδευση στην αρχαία Αθήνα ήταν υποχρεωτική για όλα τα παιδιά.",
+                "Οι κοπέλες εκπαιδεύονταν στο σπίτι από τις μητέρες τους στις οικιακές εργασίες.",
+                "Οι σοφιστές δίδασκαν ρητορική και η εκπαίδευση αυτή ήταν προσιτή σε όλους.",
+                "Ο παιδαγωγός ήταν ένας έμπιστος δούλος που συνόδευε τα αγόρια στο σχολείο.",
+                "Τα αγόρια ξεκινούσαν την εκπαίδευσή τους σε ιδιωτικά σχολεία από την ηλικία των 7 ετών.",
+                "Τα Παναθήναια γιορτάζονταν κάθε χρόνο και περιλάμβαναν μόνο αθλητικούς αγώνες.",
+                "Οι Διονυσιακές γιορτές περιλάμβαναν θεατρικές παραστάσεις.",
+                "Οι γυναίκες είχαν δικαίωμα πολιτικής συμμετοχής στην Αθήνα.",
+                "Οι πλούσιες Αθηναίες θεωρούσαν τα κοσμήματα σημαντικό κομμάτι της ενδυμασίας τους."
+            ],
+            D: [
+                "Οι Αθηναίοι πολίτες υπηρετούσαν τη στρατιωτική τους θητεία από 18 έως 20 ετών.",
+                "Σε καιρό πολέμου, στρατεύονταν όλοι οι άνδρες έως τα 50 έτη.",
+                "Η φάλαγγα ήταν η κύρια μονάδα του αθηναϊκού στρατού ξηράς.",
+                "Ο στόλος αποτελούσε τη μεγαλύτερη δύναμη της Αθήνας.",
+                "Τα σπίτια στην Αθήνα ήταν εντυπωσιακά και πολυτελή, όπως και τα δημόσια κτίρια.",
+                "Οι δρόμοι της αρχαίας Αθήνας ήταν στενοί και χωρίς ρυμοτομικό σχέδιο.",
+                "Οι Αθηναίοι έτρωγαν καθημερινά κρέας και πλούσια γεύματα.",
+                "Οι άνδρες περνούσαν μεγάλο μέρος της ημέρας τους στο σπίτι με την οικογένειά τους.",
+                "Οι γυναίκες είχαν περιορισμένο ρόλο και κυρίως ασχολούνταν με το σπίτι και τα παιδιά.",
+                "Οι άνδρες συχνά διασκέδαζαν στα συμπόσια."
+            ]
+        };
+
+        const correctAnswers = {
+            A: [true, false, false, true, false, true, false, true, true, true],
+            B: [false, true, false, true, true, false, true, false, true, false],
+            C: [true, false, true, false, true, true, false, true, false, true],
+            D: [true, false, true, true, false, true, false, false, true, true]
+        };
+
+        function checkAnswer(team, index, selectedAnswer) {
+            if (correctAnswers[team][index] === selectedAnswer) {
+                document.querySelectorAll(`#questions${team} div:nth-child(${index + 1}) button`).forEach(btn => btn.disabled = true);
+                if (index === 9) { 
+                    document.getElementById("winnerMessage").style.display = "block";
+                    disableAllTeams();
+                }
+            }
+        }
+
+        function disableAllTeams() {
+            document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+        }
+
+        function generateQuestions(team) {
+            let container = document.getElementById(`questions${team}`);
+            questions[team].forEach((question, index) => {
+                let div = document.createElement("div");
+                div.innerHTML = `
+                    <button onclick="showQuestion('${team}', ${index})">Εμφάνιση Ερώτησης ${index + 1}</button>
+                    <p id="question${team}${index}" class="hidden">${question}</p>
+                    <button class="hidden" onclick="checkAnswer('${team}', ${index}, true)">Σωστό</button>
+                    <button class="hidden" onclick="checkAnswer('${team}', ${index}, false)">Λάθος</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        generateQuestions("A");
+        generateQuestions("B");
+        generateQuestions("C");
+        generateQuestions("D");
+    </script>
+</body>
+</html>
