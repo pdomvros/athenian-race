@@ -36,6 +36,19 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
+        /* Χρώματα για κάθε ομάδα */
+        #teamA {
+            background-color: rgba(255, 182, 193, 0.8); /* Ανοιχτό ροζ */
+        }
+        #teamB {
+            background-color: rgba(173, 216, 230, 0.8); /* Ανοιχτό μπλε */
+        }
+        #teamC {
+            background-color: rgba(144, 238, 144, 0.8); /* Ανοιχτό πράσινο */
+        }
+        #teamD {
+            background-color: rgba(255, 215, 0, 0.8); /* Ανοιχτό κίτρινο */
+        }
         button {
             margin-top: 10px;
             padding: 10px;
@@ -63,33 +76,37 @@
         .incorrect {
             color: red;
         }
+        .emoji {
+            font-size: 24px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <h2>Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</h2>
-    <h1>Το Αθηναϊκό Κράτος</h1>
-    <p class="instructions">Μόλις ο/η εκπαιδευτικός σας δώσει το σύνθημα ξεκινήστε! Η ομάδα που θα απαντήσει πρώτη σωστά και τις 10 ερωτήσεις και θα φτάσει στο τέλος του πίνακα θα είναι η νικήτρια.</p>
+    <h1>Το Αθηναϊκό Κράτος 🏛️</h1>
+    <p class="instructions">Μόλις ο/η εκπαιδευτικός σας δώσει το σύνθημα ξεκινήστε! Η ομάδα που θα απαντήσει πρώτη σωστά και τις 10 ερωτήσεις και θα φτάσει στο τέλος του πίνακα θα είναι η νικήτρια. 🎉</p>
     
     <div class="container">
         <div class="column" id="teamA">
-            <h3>Ομάδα Α</h3>
+            <h3>Ομάδα Α 🎀</h3>
             <div id="questionsA"></div>
         </div>
         <div class="column" id="teamB">
-            <h3>Ομάδα Β</h3>
+            <h3>Ομάδα Β 🌊</h3>
             <div id="questionsB"></div>
         </div>
         <div class="column" id="teamC">
-            <h3>Ομάδα Γ</h3>
+            <h3>Ομάδα Γ 🌿</h3>
             <div id="questionsC"></div>
         </div>
         <div class="column" id="teamD">
-            <h3>Ομάδα Δ</h3>
+            <h3>Ομάδα Δ 🌟</h3>
             <div id="questionsD"></div>
         </div>
     </div>
 
-    <p id="winnerMessage">ΜΠΡΑΒΟ! Η ομάδα νίκησε!</p>
+    <p id="winnerMessage">ΜΠΡΑΒΟ! Η ομάδα νίκησε! 🎉🏆</p>
 
     <!-- Ηχοι -->
     <audio id="failSound">
@@ -172,7 +189,7 @@
             feedbackElement.classList.add("feedback");
 
             if (correctAnswers[team][index] === selectedAnswer) {
-                feedbackElement.textContent = "Σωστό!";
+                feedbackElement.textContent = "Σωστό! 🎉";
                 feedbackElement.classList.add("correct");
                 document.querySelectorAll(`#questions${team} div:nth-child(${index + 1}) button`).forEach(btn => btn.disabled = true);
                 if (index === 9) { 
@@ -182,7 +199,7 @@
                     disableAllTeams();
                 }
             } else {
-                feedbackElement.textContent = "Προσπάθησε ξανά!";
+                feedbackElement.textContent = "Προσπάθησε ξανά! 😅";
                 feedbackElement.classList.add("incorrect");
                 const failSound = document.getElementById("failSound");
                 failSound.play(); // Παίζει τον ήχο αποτυχίας
